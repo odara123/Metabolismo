@@ -15,5 +15,61 @@
 </head>
 <body>
     <h1> Método de Metabolismo Basal </h1> 
+    <form name="calc" class="form-horizontal">
+<fieldset>
+<center>Ao preencher os campos, usar ponto (.) e não vírgula
+(,) para escrever as casas decimais dos números!</center>
+<div class="well well-large">
+<div class="form-group"> <br>
+<label class="col-sm-4 control-label" for="peso">Sexo:</label>&nbsp;
+<label class="checkbox inline" for="sexo1"> <input checked="checked" value="M" id="sexo1" name="sexo" type="radio"> Homem </label> <label class="checkbox inline" for="sexo2"> <input value="F" id="sexo2" name="sexo" type="radio">
+Mulher </label><br>
+<br>
+</div>
+<div class="form-group"> <label for="peso" class="col-sm-4 control-label">Peso :</label>&nbsp;
+<input maxlength="5" class="span2" id="peso" name="peso" type="text"> <label for="tipopeso1" class="checkbox inline"><input checked="checked" value="K" id="tipopeso1" name="tipopeso" type="radio"> Quilos</label> <label for="tipopeso2" class="checkbox inline"><input value="L" id="tipopeso2" name="tipopeso" type="radio">
+Libras</label> <br>
+<br>
+</div>
+<div class="form-group"> <label for="estatura" class="col-sm-4 control-label">Estatura:</label>&nbsp;
+<input maxlength="5" class="span2" id="estatura" name="estatura" type="text"> <label for="tipoestatura1" class="checkbox inline"><input checked="checked" value="C" id="tipoestatura1" name="tipoestatura" type="radio"> Centímetros</label>
+<label for="tipoestatura2" class="checkbox inline"><input value="P" id="tipoestatura2" name="tipoestatura" type="radio">Polegadas</label> <br>
+<br>
+</div>
+</div>
+<div class="form-group"> <label for="edad" class="col-sm-4 control-label">Idade:</label>&nbsp;
+<input maxlength="2" class="span2 form-control" id="edad" name="edad" type="text">&nbsp;&nbsp;anos
+</div>
+<br>
+<div class="form-group"> <label for="actividad" class="col-sm-4 control-label">Nível de atividade:</label>
+&nbsp;
+<select id="actividad" size="1" name="actividad"><option selected="true" value="1.2">Sedentário</option><option value="1.375">Atividade ligeira</option><option value="1.55">Atividade moderada</option><option value="1.725">Atividade intensa</option><option value="1.9">Atividade muito intensa</option></select>
+</div>
+</fieldset>
+</form>
+</div>
+<br>
+<center><b><font color="#006432">RESULTADOS:</font></b></center>
+<br>
+<div class="alert alert-success">
+<div> <label>Metabolismo basal:</label> <span id="tmb" style="margin-left: 0.5em; font-size: 18px; font-weight: bold;"></span>
+</div>
+<br>
+<div> <label>Calorias necessárias para manter o peso:</label>
+<span id="mantener" style="margin-left: 0.5em; font-size: 18px; font-weight: bold;"></span></div>
+<br>
+<div> <label>Calorias para emagrecer:</label> <span id="quemar" style="margin-left: 0.5em; font-size: 18px; font-weight: bold;"></span>
+</div>
+<br>
+<div> <label>Calorias para subir de peso:</label> <span id="subir" style="margin-left: 0.5em; font-size: 18px; font-weight: bold;"></span>
+</div>
+<br>
+</div>
+<br>
+<div align="center"> <button onclick="calcIt();return false;" value="Cálcular">Calcular</button>
+</div>
+<br><br>
+<hr>
+<br><br>
 </body>
 </html>
