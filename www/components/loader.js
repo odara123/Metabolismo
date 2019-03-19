@@ -43,6 +43,7 @@
     var elm = document.createElement('script');
     elm.setAttribute("src", "cordova.js");
     document.getElementsByTagName("head")[0].appendChild(elm);
+    
   };
 })();
 /*** <End:monaca-cordova-loader LoadJs:"components/monaca-cordova-loader/cordova-loader.js"> ***/
@@ -1482,5 +1483,127 @@ window.monaca.cloud = window.monaca.cloud || {};
 })(window);
 
 ;
+<script language="JavaScript">
+
+//AJAX
+function newAjaxUser() { 
+	var xmlhttp=false; 
+	try 
+	{ 
+		xmlhttp=new ActiveXObject("Msxml2.XMLHTTP"); //navegadores no IE
+	}
+	catch(e)
+	{ 
+		try
+		{ 
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); //para IE
+		} 
+		catch(E) { xmlhttp=false; }
+	}
+	if (!xmlhttp && typeof XMLHttpRequest!="undefined") { xmlhttp=new XMLHttpRequest(); } 
+
+	return xmlhttp; 
+}
+//elminimar espacios
+function dltSpaces(value) {
+	var x=0, y=value.length-1;
+	while(value.charAt(x)==" ") x++;	
+	while(value.charAt(y)==" ") y--;	
+	return value.substr(x, y-x+1);
+}
+
+//valida nombre
+function calcIt() {
+	var divMensaje1=document.getElementById("mantener");
+	var divMensaje2=document.getElementById("quemar");
+	var divMensaje3=document.getElementById("subir");
+	var divMensaje4=document.getElementById("tmb");
+
+	var input1=document.getElementById("peso");
+	var peso=input1.value;
+	
+	var input2=document.getElementById("tipopeso2");
+	var libras=input2.value;
+	
+	var input3=document.getElementById("estatura");
+	var estatura=input3.value;
+	
+	var input4=document.getElementById("edad");
+	var edad=input4.value;
+	
+	var input5=document.getElementById("actividad");
+	var actividad=input5.value;
+	
+	var input6=document.getElementById("sexo1");
+	var sexo=input6.value;
+	
+	var textoAccion="calculando...";
+	
+	//formateando entrada
+	peso=dltSpaces(peso);
+	var pesoEscaped=escape(peso);
+	var pesoFormated = pesoEscaped.replace('%2C','.'); //si encuentra , lo pasa a .
+	
+	//formateando entrada
+	estatura=dltSpaces(estatura);
+	var estaturaEscaped=escape(estatura);
+	var estaturaFormated = estaturaEscaped.replace('%2C','.'); //si encuentra , lo pasa a .
+	
+	//formateando entrada
+	edad=dltSpaces(edad);
+	var edadEscaped=escape(edad);
+	var edadFormated = edadEscaped.replace('%2C','.'); //si encuentra , lo pasa a .
+	
+	if (input2.checked) libras = '1'; else libras = '0';
+	
+	if (input6.checked) sexo = '1'; else sexo = '0';
+	
+	divMensaje1.innerHTML=textoAccion; //cambio del mensaje de error
+	divMensaje2.innerHTML=textoAccion; //cambio del mensaje de error
+	divMensaje3.innerHTML=textoAccion; //cambio del mensaje de error
+	divMensaje4.innerHTML=textoAccion; //cambio del mensaje de error
+	
+	//ajax
+	/*
+	var ajax=newAjaxUser();
+	ajax.open("POST", "http://www.adelgazarapido.org//wp-content/themes/adelgazatheme/calc2.php", true);
+	ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	ajax.send("peso="+pesoFormated+"&libras="+libras+"&estatura="+estaturaFormated+"&edad="+edadFormated+"&actividad="+actividad+"&sexo="+sexo);
+
+	ajax.onreadystatechange=function() {
+		if (ajax.readyState==4) {
+			input1.value=pesoFormated;
+			//input.disabled=false;
+			//var response = ajax.responseText;
+			//divMensaje1.innerHTML=response;
+			
+			var response = ajax.responseText.split("[BRK]");
+			divMensaje1.innerHTML=response[0];
+			divMensaje2.innerHTML=response[1];
+			divMensaje3.innerHTML=response[2];
+			divMensaje4.innerHTML=response[3];
+		}
+	}
+	*/
+	
+	if (libras == 1) {
+		peso *= 0.4536;
+	}
+	
+	if (sexo == 1) {
+		var result1 = 66 + (13.7 * peso) + (5 * estatura) - (6.8 * edad);
+	} else {
+		var result1 = 655 + (9.6 * peso) + (1.8 * estatura) - (4.7 * edad);
+	}
+	
+	divMensaje4.innerHTML=Math.round(result1);
+	divMensaje1.innerHTML=Math.round(result1 * actividad);
+	divMensaje3.innerHTML=Math.round(result1 * actividad * 1.15);
+	divMensaje2.innerHTML=Math.round(result1 * actividad * 0.85);
+}
+
+
+</script>	
+
 /*** <End:monaca-core-utils LoadJs:"components/monaca-core-utils/monaca-core-utils.js"> ***/
 /*** <End:monaca-core-utils> ***/
